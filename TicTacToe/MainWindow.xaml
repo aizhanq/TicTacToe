@@ -7,7 +7,16 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Title="Tic Tac Toe" Height="500" Width="500">
-    <Grid>
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="0.5" />
+            <Setter Property="FontSize" Value="70" />
+        </Style>
+    </Window.Resources>
+    
+    <Grid x:Name="Container">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
