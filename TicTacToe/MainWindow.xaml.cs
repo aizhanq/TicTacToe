@@ -57,6 +57,7 @@ namespace TicTacToe
             // Make sure Player 1 starts the game
             mPlayer1Turn = true;
 
+            // Iterate every button on the grid...
             Container.Children.Cast<Button>().ToList().ForEach(button =>
             {
                 // Change background, foreground and content to default values
@@ -67,6 +68,50 @@ namespace TicTacToe
 
             // Make sure the game hasn't finished
             mGameEnded = false;
+        }
+
+        /// <summary>
+        /// Handles a button click event
+        /// </summary>
+        /// <param name="sender">The button that was clicked</param>
+        /// <param name="e">The event of the click</param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            // Start a new game on the click after it finished
+            if (mGameEnded)
+            {
+                NewGame();
+                return;
+            }
+
+            // Cast the sender to a button
+            var button = (Button)sender;
+
+            // Find the button position in the array
+            var column = Grid.GetColumn(button);
+            var row = Grid.GetRow(button);
+
+            var index = column + (row * 3);
+
+            //Don't do anything if the cell already has a value in it
+            if (mResults[index] != MarkType.Free)
+            {
+                return;
+            }
+
+            // Set the cell value based on which players turn it is
+            mResults[index] = mPlayer1Turn ? MarkType.Cross : MarkType.Nought;
+
+            // Set button text to the result
+            button.Content = mPlayer1Turn ? "X" : "O";
+
+            // Change noughts to red
+            if (!mPlayer1Turn)
+                button.Foreground = Brushes.Red;
+
+            // Toggle the players turns
+            mPlayer1Turn ^= true;
+
         }
 
     }
