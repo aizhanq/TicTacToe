@@ -237,7 +237,7 @@ namespace TicTacToe
             #region No Winners
 
             // Check for no winner and full board
-            if (!mResults.Any(cell => cell == MarkType.Free))
+            if (!mGameEnded && !mResults.Any(cell => cell == MarkType.Free))
             {
                 // Game ended
                 mGameEnded = true;
