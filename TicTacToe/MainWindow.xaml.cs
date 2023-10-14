@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Windows;
+using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace TicTacToe
 {
@@ -40,9 +43,31 @@ namespace TicTacToe
 
         #endregion
 
+        /// <summary>
+        /// Starts a new game and clears all values back to the start
+        /// </summary>
         private void NewGame()
         {
-            
+            // Create a new blank array of free cells
+            mResults = new MarkType[9];
+
+            for (int i = 0; i < mResults.Length; i++)
+                mResults[i] = MarkType.Free;
+
+            // Make sure Player 1 starts the game
+            mPlayer1Turn = true;
+
+            Container.Children.Cast<Button>().ToList().ForEach(button =>
+            {
+                // Change background, foreground and content to default values
+                button.Content = string.Empty;
+                button.Background = Brushes.White;
+                button.Foreground = Brushes.Blue;
+            });
+
+            // Make sure the game hasn't finished
+            mGameEnded = false;
         }
+
     }
 }
